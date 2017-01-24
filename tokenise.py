@@ -1,13 +1,28 @@
-import numpy as np
+import imp
 from nltk import word_tokenize
 import os
 import sys
 
-reload(sys)
+imp.reload(sys)
 
-sys.setdefaultencoding('utf8')
+def tokenize(text):
+    return map(lambda x: x.lower(), word_tokenize(text))
 
-file1 = open("/home/walker/Desktop/Information-Retrieval-Assignments/data/1.txt",'r')
+def cal():
+    path = os.path.realpath('.')
+    tokenized_words = []
+    for files in os.listdir(os.path.join(path, 'data')):
+        with open(os.path.join(path, 'data', files), "r") as f:
+            _id = files[:-4]
+            data = {
+                'id': _id,
+                'text': tokenize(f.read())
+            }
+            tokenized_words.append(data)
+    return tokenized_words
+
+
+'''file1 = open("/home/walker/Desktop/Information-Retrieval-Assignments/data/1.txt",'r')
 
 raw1 = file1.read()
 
@@ -105,4 +120,4 @@ list10 = word_tokenize(raw10)
 
 list10 = map(lambda x: x.lower(),list10)
 
-file10.close()
+file10.close()'''
