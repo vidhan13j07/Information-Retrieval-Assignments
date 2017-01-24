@@ -90,7 +90,7 @@ def cosine_similarity(frequency_array,length_array):
 	for i in range(1,rows):
 		for j in range(0,col):
 			sum = sum + frequency_array[0,j]*frequency_array[i,j]
-		simi_array[i-1] = sum/length_array[i-1]
+		simi_array[i-1] = sum/(length_array[i-1]*length_array[0])
 		sum = 0
 	return simi_array
 
