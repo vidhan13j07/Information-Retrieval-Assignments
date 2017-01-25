@@ -1,5 +1,5 @@
 from tokenise import cal
-from collection import OrderedDict
+#from collection import OrderedDict
 
 tokenizedwords = cal()
 d = dict()
@@ -13,5 +13,5 @@ for data in tokenizedwords:
         else:
             d[token] = [data['id']]
 
-for key, value in sorted(d.keys()):
-    print(key, value)
+for key in sorted(d.keys()):
+    print(key, d[key])

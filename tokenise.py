@@ -1,12 +1,20 @@
-import imp
 from nltk import word_tokenize
 import os
 import sys
+from nltk.stem import *
+from nltk.tokenize import RegexpTokenizer
 
-imp.reload(sys)
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def tokenize(text):
-    return map(lambda x: x.lower(), word_tokenize(text))
+    text = text.encode('ascii',errors='ignore')
+    tokenizer = RegexpTokenizer(r'\w+')
+    text1 = tokenizer.tokenize(text)
+    x =  map(lambda x: x.lower(), text1)
+    stemmer = PorterStemmer()
+    stem  = [stemmer.stem(y) for y in x]
+    return stem
 
 def cal():
     path = os.path.realpath('.')
@@ -21,8 +29,9 @@ def cal():
             tokenized_words.append(data)
     return tokenized_words
 
+x = cal()
 
-'''file1 = open("/home/walker/Desktop/Information-Retrieval-Assignments/data/1.txt",'r')
+file1 = open("/home/walker/Desktop/Information-Retrieval-Assignments/data/1.txt",'r')
 
 raw1 = file1.read()
 
@@ -120,4 +129,4 @@ list10 = word_tokenize(raw10)
 
 list10 = map(lambda x: x.lower(),list10)
 
-file10.close()'''
+file10.close()
